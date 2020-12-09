@@ -7,13 +7,13 @@ verify_ssl = true
 
 [packages]
 flask = "*"
+jinja2 = "*"
+tweepy = "*"
+psycopg2 = "*"
 flask-sqlalchemy = "*"
 gunicorn = "*"
-python-decouple = "*"
-tweepy = "*"
-psycopg2-binary = "*"
-spacy = "*"
 scikit-learn = "*"
+python-dotenv = "*"
+spacy = "*"
 
 [requires]
-python_version = "3.7"

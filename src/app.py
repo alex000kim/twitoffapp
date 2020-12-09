@@ -1,4 +1,4 @@
-from decouple import config
+from os import getenv
 from flask import Flask, render_template, request
 from .models import DB, User
 from .twitter import add_or_update_user
@@ -6,7 +6,7 @@ from .twitter import add_or_update_user
 
 def create_app():
 	app = Flask(__name__)
-	app.config['SQLALCHEMY_DATABASE_URI'] = config('DATABASE_URL')
+	app.config['SQLALCHEMY_DATABASE_URI'] = getenv('DATABASE_URL')
 	DB.init_app(app)
 
 	@app.route('/')
