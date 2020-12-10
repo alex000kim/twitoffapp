@@ -12,10 +12,14 @@ def predict_user(user1_name, user2_name, tweet_text):
     user2 = User.query.filter(User.name == user2_name).one()
     user1_embeddings = np.array([tweet.embedding for tweet in user1.tweets])
     user2_embeddings = np.array([tweet.embedding for tweet in user2.tweets])
+    # X matrix of features
     embeddings = np.vstack([user1_embeddings, user2_embeddings])
+    # y array of labels
     labels = np.concatenate([np.ones(len(user1.tweets)),
-                                np.zeros(len(user2.tweets))])
+                             np.zeros(len(user2.tweets))])
+
     knnc = KNeighborsClassifier(weights='distance', metric='cosine').fit(embeddings, labels)
     #vectorizing the tweet using spacy
     tweet_embedding = vectorize_tweet(tweet_text)
-    return knnc.predict(np.array(tweet_embedding).reshape(1, -1))
+    prediction = knnc.predict(np.array(tweet_embedding).reshape(1, -1)) # will return 1 for user1 or 0 or user2
+    return prediction

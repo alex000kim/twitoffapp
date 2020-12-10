@@ -46,3 +46,8 @@ def add_or_update_user(name):
 	except Exception as e:
 		print(f'Unable to process user {name}: {str(e)}')
 
+
+def update_all_users():
+	"""Update all tweets for existing users"""
+	for user in User.query.all():
+		add_or_update_user(user.name)
